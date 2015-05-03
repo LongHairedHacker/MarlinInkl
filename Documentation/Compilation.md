@@ -1,16 +1,10 @@
 # Configuring and compilation
 
-  1. Install the latest non-beta arduino software IDE/toolset: http://www.arduino.cc/en/Main/Software
-  2. Download the Marlin firmware
-    - [Latest developement version](https://github.com/MarlinFirmware/Marlin/tree/Development)
-    - [Stable version]()
-  3. In both cases use the "Download Zip" button on the right.
-  4. Some boards require special files and/or libraries from the ArduinoAddons directory. Take a look at the dedicated [README](/ArduinoAddons/README.md) for details.
-  5. Start the arduino IDE.
-  6. Select Tools -> Board -> Arduino Mega 2560 or your microcontroller
-  7. Select the correct serial port in Tools ->Serial Port
-  8. Open Marlin.pde or .ino
-  9. Click the Verify/Compile button
-  10. Click the Upload button. If all goes well the firmware is uploading
+1. Clone the git repository.
+2. Run getdeps.sh (needs *bash*, *curl*, *tar*, *find* and *sed*) to get
+	the correct (and patched) versions of the arduino and teensy libraries.
+	All libraries will be instellad to arduinoi-105 in the repos toplevel directory.
+3. Run make inside the Marlin directory.
+4. Flash Marlin/applet/Marlin.hex to your controller board.
 
-That's ok.  Enjoy Silky Smooth Printing.
+Enjoy Smooth Printing.
