@@ -118,6 +118,8 @@
   #include "pins_FELIX2.h"
 #elif MB(99)
   #include "pins_99.h"
+#elif MB(TEENSYLU_INKL)
+  #include "pins_TEENSYLU_INKL.h" 
 #else
   #error Unknown MOTHERBOARD value set in Configuration.h
 #endif

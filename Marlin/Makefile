@@ -37,11 +37,11 @@
 # from the commandline with "make HARDWARE_MOTHERBOARD=71" for example
 
 # This defined the board you are compiling for (see boards.h for the options)
-HARDWARE_MOTHERBOARD ?= 11
+HARDWARE_MOTHERBOARD ?= 1337
 
 # Arduino source install directory, and version number
 # On most linuxes this will be /usr/share/arduino
-ARDUINO_INSTALL_DIR  ?= /usr/share/arduino
+ARDUINO_INSTALL_DIR  ?= ../arduino-1.0.5
 ARDUINO_VERSION      ?= 105
 
 # You can optionally set a path to the avr-gcc tools. Requires a trailing slash. (ex: /usr/local/avr-gcc/bin)
@@ -193,6 +193,9 @@ else ifeq  ($(HARDWARE_MOTHERBOARD),68)
 HARDWARE_VARIANT ?= arduino
 MCU              ?= atmega2560
 
+else ifeq ($(HARDWARE_MOTHERBOARD),1337)
+HARDWARE_VARIANT ?= Teensy
+MCU              ?= at90usb647
 endif
 
 # Be sure to regenerate speed_lookuptable.h with create_speed_lookuptable.py
@@ -268,7 +271,7 @@ CXXSRC = WMath.cpp WString.cpp Print.cpp Marlin_main.cpp	\
 	MarlinSerial.cpp Sd2Card.cpp SdBaseFile.cpp SdFatUtil.cpp	\
 	SdFile.cpp SdVolume.cpp motion_control.cpp planner.cpp		\
 	stepper.cpp temperature.cpp cardreader.cpp configuration_store.cpp \
-	watchdog.cpp SPI.cpp servo.cpp Tone.cpp ultralcd.cpp digipot_mcp4451.cpp \
+	watchdog.cpp SPI.cpp Servo.cpp Tone.cpp ultralcd.cpp digipot_mcp4451.cpp \
 	vector_3.cpp qr_solve.cpp
 ifeq ($(LIQUID_TWI2), 0)
 CXXSRC += LiquidCrystal.cpp
@@ -388,7 +391,20 @@ else
 endif
 
 # Default target.
-all: sizeafter
+all: printconfig sizeafter
+
+printconfig:
+	@echo "----- Build configuration -----"
+	@echo "MOTHERBOARD: $(HARDWARE_MOTHERBOARD)"
+	@echo "MCU: $(MCU)"
+	@echo "F_CPU: $(F_CPU)"
+	@echo "CFLAGS: $(CLFLAGS)"
+	@echo "CXXFLAGS: $(CXXFLAGS)"
+	@echo "LDFLAGS: $(LDFLAGS)"
+	@echo "VPATH: $(VPATH)"
+	@echo "SRC: $(SRC)"
+	@echo "CXXSRC: $(CXXSRC)"
+	@echo "-------------------------------"
 
 build: $(BUILD_DIR) elf hex
 
