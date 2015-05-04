@@ -10,4 +10,4 @@ curl -L "http://arduino.googlecode.com/files/arduino-1.0.5-src.tar.gz" | tar -xv
 mkdir -p "$TEENSY_DIR"
 curl -L "https://github.com/PaulStoffregen/cores/archive/1.17.tar.gz" | tar -xvzf - -C "$TEENSY_DIR"
 mv "$TEENSY_DIR/cores-1.17" "$TEENSY_DIR/cores"
-find "$TEENSY_DIR/cores" -type f -exec sed -i 's/defined(__AVR_AT90USB646__)/defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB647__)/g' {} \;
+find "$TEENSY_DIR/cores" -type f -exec sed -ibak 's/defined(__AVR_AT90USB646__)/defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB647__)/g' {} \;
