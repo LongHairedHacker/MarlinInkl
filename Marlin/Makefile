@@ -47,12 +47,6 @@ ARDUINO_VERSION      ?= 105
 # You can optionally set a path to the avr-gcc tools. Requires a trailing slash. (ex: /usr/local/avr-gcc/bin)
 AVR_TOOLS_PATH ?=
 
-#Programmer configuration
-UPLOAD_RATE        ?= 115200
-AVRDUDE_PROGRAMMER ?= wiring
-# on most linuxes this will be /dev/ttyACM0 or /dev/ttyACM1 
-UPLOAD_PORT        ?= /dev/arduino
-
 #Directory used to build files in, contains all the build files, from object files to the final hex file
 #on linux it is best to put an absolute path like /home/username/tmp .
 BUILD_DIR          ?= applet
@@ -503,7 +497,7 @@ clean:
 	$P rm -rf $(BUILD_DIR)
 
 
-.PHONY:	all build elf hex eep lss sym program coff extcoff clean depend sizebefore sizeafter
+.PHONY:	all build elf hex eep lss sym coff extcoff clean depend sizebefore sizeafter
 
 # Automaticaly include the dependency files created by gcc
 -include ${wildcard $(BUILD_DIR)/*.d}
